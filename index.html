@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Haaid's First Website</title>
+    <meta charset="UTF-8">
+    <title>Boat Pass Generator</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Please close my website!</h1>
-    <p>THIS WEBSITE IS NOT ACCESSIBLE BY ANYONE!</p>
+    <div class="container">
+        <h1>Boat Pass Generator</h1>
+        <input type="text" id="nameInput" placeholder="Enter your name">
+        <button onclick="generatePass()">Generate Boat Pass</button>
+
+        <div id="passCard" class="card hidden">
+            <img src="boat.jpg" alt="Boat" class="boat-img">
+            <h2>Boat Pass</h2>
+            <p id="passName"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
