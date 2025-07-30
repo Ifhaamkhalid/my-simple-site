@@ -1,24 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <title>Boat Pass Generator</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 30px;
+            background-color: #f0f0f0;
+        }
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px;
+        }
+        canvas {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>EMBUDU VILLAGE Boat Pass Generator</h1>
-        <input type="text" id="nameInput" placeholder="Enter your name">
-        <button onclick="generatePass()">Generate Boat Pass</button>
+    <h1>Boat Pass Generator</h1>
+    <input type="text" id="nameInput" placeholder="Enter your name">
+    <button onclick="generatePass()">Generate Boat Pass</button>
+    <br>
+    <canvas id="passCanvas" width="282" height="427"></canvas>
 
-        <div id="passCard" class="card hidden">
-            <img src="boat.jpg" alt="Boat" class="boat-img">
-            <h2>Boat Pass</h2>
-            <p id="passName"></p>
-        </div>
-    </div>
+    <script>
+        const canvas = document.getElementById('passCanvas');
+        const ctx = canvas.getContext('2d');
 
-    <script src="script.js"></script>
+        const baseImage = new Image();
+        baseImage.src = 'Screenshot_2025-07-30_220346.jpg'; // Image filename
+
+        baseImage.onload = () => {
+            ctx.drawImage(baseImage, 0, 0, canvas.width, canvas.height);
+        };
+
+        function generatePass() {
+            const name = document.getElementById('nameInput').value.trim();
+            if (name === '') {
+                alert("Please enter your name.");
+                return;
+            }
+
+            // Redraw the base image
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(baseImage, 0, 0, canvas.width, canvas.height);
+
+            // Set text style
+            ctx.fillStyle = "white";
+            ctx.font = "bold 40px Arial";
+            ctx.textAlign = "right";
+
+            // Generate a pass number from name (for demo)
+            let passNumber = (name.length * 13) % 100;  // Just a fun formula
+            if (passNumber < 10) passNumber = "0" + passNumber;
+
+            // Draw the number
+            ctx.fillText(passNumber, canvas.width - 20, canvas.height - 25);
+        }
+    </script>
 </body>
 </html>
